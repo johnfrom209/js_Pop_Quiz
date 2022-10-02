@@ -114,7 +114,7 @@ const bText = document.getElementById("dText");
 const cText = document.getElementById("bText");
 const dText = document.getElementById("cText");
 //grabbing all answer elements on the page
-const answerEls = document.querySelectorAll(".answer");
+const answerEls = document.querySelectorAll(".options");
 //score tracker
 var score = 0;
 //index for array
@@ -122,7 +122,7 @@ var indexQuiz = 0;
 //is game started
 var gameStarted = false;
 //what did the user select
-var userAnswer = 0;
+var userAnswer = undefined;
 var timeRemaining = 0;
 //on click start quiz and start timer
 startBtn.addEventListener("click", () => {
@@ -133,12 +133,15 @@ startBtn.addEventListener("click", () => {
         countdown();
         gameStarted = true;
     }
+
+    userAnswer = getUserAnswer();
+
     //just need to skip the first click 
-    if (userAnswer !== 0) {
-        const tempAnswer = getUserAnswer();
+    if (userAnswer) {
+        userAnswer = getUserAnswer();
         //is set to undefined 
-        if (tempAnswer) {
-            if (tempAnswer === quizArray[indexQuiz].correct) {
+        if (userAnswer) {
+            if (userAnswer === quizArray[indexQuiz].correct) {
                 score++;
             }
             else {
@@ -160,6 +163,9 @@ startBtn.addEventListener("click", () => {
 
     //submit and grab next question
     loadQuiz();
+
+
+    console.log(userAnswer);
 });
 
 function countdown() {
