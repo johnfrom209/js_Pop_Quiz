@@ -26,7 +26,7 @@ const quizArray = [
         b: 'Exercise',
         c: 'Note Taking',
         d: 'Dynamic WebPages',
-        correct: 'Dynamic WebPages'
+        correct: 'd'
     },
     {
         question: 'When was javascript created?',
@@ -34,7 +34,7 @@ const quizArray = [
         b: '1995',
         c: '1700',
         d: '1990',
-        correct: '1995'
+        correct: 'b'
     },
     {
         question: 'Who invented javascript?',
@@ -42,7 +42,7 @@ const quizArray = [
         b: 'Tom Hardy',
         c: 'Brendan Fraser',
         d: 'Grace Hopper',
-        correct: 'Brendan Elch'
+        correct: 'a'
     },
     {
         question: 'How many days did it take to create javascript?',
@@ -50,7 +50,7 @@ const quizArray = [
         b: '45',
         c: '10',
         d: '100',
-        correct: '10'
+        correct: 'c'
     },
     {
         question: 'Where does javascript run?',
@@ -58,47 +58,47 @@ const quizArray = [
         b: 'Matrix',
         c: 'Server side',
         d: 'Client side',
-        correct: 'Client side'
+        correct: 'd'
     },
     {
-        question: '',
-        a: '',
-        b: '',
-        c: '',
-        d: '',
-        correct: ''
+        question: 'Which is not a javascript dynamic capability?',
+        a: 'Runtime Object Construction',
+        b: 'Variable Parameter Lists',
+        c: 'Function Variables',
+        d: 'Hotspot Orient Junction',
+        correct: 'd'
     },
     {
-        question: '',
-        a: '',
-        b: '',
-        c: '',
-        d: '',
-        correct: ''
+        question: 'How do you all a local storage variable?',
+        a: 'localStorage.get()',
+        b: 'localStorage.getItem()',
+        c: 'localStorage.pull()',
+        d: 'localStorage()',
+        correct: 'b'
     },
     {
-        question: '',
-        a: '',
-        b: '',
-        c: '',
-        d: '',
-        correct: ''
+        question: 'How do you get document element by id?',
+        a: 'document.getElementById("str")',
+        b: 'doc.getEleId(str)',
+        c: 'document.querySelectorAll(str)',
+        d: 'document.querySelector(str)',
+        correct: 'a'
     },
     {
-        question: '',
-        a: '',
-        b: '',
-        c: '',
-        d: '',
-        correct: ''
+        question: 'Which of these changes the text on the html?',
+        a: 'ele.setAttribute(str)',
+        b: 'ele = str',
+        c: 'ele.setText = str',
+        d: 'ele.textContent = str',
+        correct: 'd'
     },
     {
-        question: '',
-        a: '',
-        b: '',
-        c: '',
-        d: '',
-        correct: ''
+        question: 'What does === check in JS?',
+        a: 'Checks if two operands are equal',
+        b: 'Checks if two operands are false',
+        c: 'checks if two operands are equal in type and value',
+        d: 'Sets the variables equal to each other',
+        correct: 'c'
     },
 ]
 
@@ -163,7 +163,7 @@ startBtn.addEventListener("click", () => {
 });
 
 function countdown() {
-    timeRemaining = 10;
+    timeRemaining = 60;
     var timerInterval = setInterval(function () {
         //sub timer by 1 each interval
         timeRemaining -= 1;
