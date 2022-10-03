@@ -141,6 +141,8 @@ startBtn.addEventListener("click", () => {
         loadQuiz();
         //hide start btn
         // startBtn.setAttribute("hidden")
+
+        startBtn.textContent = "Submit";
     }
     else {
 
@@ -208,6 +210,7 @@ function countdown() {
             timer.textContent = score + "/" + quizArray.length;
             // startBtn.hidden = false;
             startBtn.setAttribute("onclick", "location.reload()");
+            startBtn.textContent = "Reload"
             //save to LS asking for initials
             askUser();
             //reset gameStarted
@@ -303,12 +306,12 @@ function loadFromLS() {
     //load LS
 
     //looping through the LS to display on page
-    var played = [JSON.parse(localStorage.getItem("PlayedArray"))];
+    var played = JSON.parse(localStorage.getItem("PlayedArray"));
     console.log(played);
-    for (var i = 0; i < played[0].length; i++) {
+    for (var i = 0; i < played.length; i++) {
         // var temp = played[i];
         var li = document.createElement("li");
-        li.textContent = played[0][i].initials + " " + played[0][i].savedScore;
+        li.textContent = played[i].initials + " " + played[i].savedScore;
         cleanUl.appendChild(li);
     }
 
@@ -340,8 +343,3 @@ function askUser() {
     // formUSubmit = document.getElementById("submitScore");
 
 }
-
-//see scores
-//make link hidden
-//clear the li
-//display scores from ls
