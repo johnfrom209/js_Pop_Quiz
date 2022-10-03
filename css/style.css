@@ -54,7 +54,7 @@ body {
     font-size: 2rem;
 }
 
-#btnStart {
+.btnStart {
     font-size: 2rem;
     display: flex;
     justify-content: center;

@@ -137,6 +137,8 @@ startBtn.addEventListener("click", () => {
         //start timer
         countdown();
         gameStarted = true;
+        //hide start btn
+        // startBtn.setAttribute("hidden")
     }
 
     userAnswer = getUserAnswer();
@@ -158,11 +160,14 @@ startBtn.addEventListener("click", () => {
             indexQuiz++;
             //checking if there are questions left in the array
             if (indexQuiz < quizArray.length) {
+                //loads next question
                 loadQuiz();
             }
             else {
                 //display score and ask for user initials
                 question.textContent = "All done";
+                //set start btn to reload page
+                startBtn.setAttribute("click", "location.reload()");
             }
         }
     }
@@ -172,7 +177,7 @@ startBtn.addEventListener("click", () => {
 });
 
 function countdown() {
-    timeRemaining = 5;
+    timeRemaining = 60;
     var timerInterval = setInterval(function () {
         //sub timer by 1 each interval
         timeRemaining -= 1;
@@ -186,11 +191,18 @@ function countdown() {
             askUser();
             //reset gamestarted
             gameStarted = false;
+            //set start btn to reload page
+            startBtn.removeAttribute("id");
+            startBtn.hidden = false;
+            startBtn.textContent = "Reload"
+            startBtn.setAttribute("onclick", "location.reload()");
         }
         //win condition
         else if (indexQuiz === quizArray.length) {
             clearInterval(timerInterval);
             timer.textContent = score + "/" + quizArray.length;
+            startBtn.hidden = false;
+            startBtn.setAttribute("onclick", "location.reload()");
             //save to LS asking for initials
             askUser();
             //reset gameStarted
@@ -294,6 +306,9 @@ function loadFromLS() {
         li.textContent = played[0][i].initials + " " + played[0][i].savedScore;
         cleanUl.appendChild(li);
     }
+
+    //replace the start to reload the page
+    startBtn.setAttribute("click", "location.reload()");
 }
 
 function askUser() {
