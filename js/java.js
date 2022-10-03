@@ -69,7 +69,7 @@ const quizArray = [
         correct: 'd'
     },
     {
-        question: 'How do you all a local storage variable?',
+        question: 'How do you access the local storage?',
         a: 'localStorage.get()',
         b: 'localStorage.getItem()',
         c: 'localStorage.pull()',
@@ -137,43 +137,48 @@ startBtn.addEventListener("click", () => {
         //start timer
         countdown();
         gameStarted = true;
+        //submit and grab next question
+        loadQuiz();
         //hide start btn
         // startBtn.setAttribute("hidden")
     }
+    else {
 
-    userAnswer = getUserAnswer();
-
-    //just need to skip the first click 
-    if (userAnswer) {
         userAnswer = getUserAnswer();
-        //is set to undefined 
-        if (userAnswer) {
-            if (userAnswer === quizArray[indexQuiz].correct) {
-                score++;
-            }
-            else {
-                //call the wrong function to lower time
-                userWrong();
-            }
 
-            //inc indexQuiz
-            indexQuiz++;
-            //checking if there are questions left in the array
-            if (indexQuiz < quizArray.length) {
-                //loads next question
-                loadQuiz();
-            }
-            else {
-                //display score and ask for user initials
-                question.textContent = "All done";
-                //set start btn to reload page
-                startBtn.setAttribute("click", "location.reload()");
+        //just need to skip the first click 
+        if (userAnswer) {
+            userAnswer = getUserAnswer();
+            //is set to undefined 
+            if (userAnswer) {
+                if (userAnswer === quizArray[indexQuiz].correct) {
+                    score++;
+                }
+                else {
+                    //call the wrong function to lower time
+                    userWrong();
+                }
+
+                //inc indexQuiz
+                indexQuiz++;
+                //checking if there are questions left in the array
+                if (indexQuiz < quizArray.length) {
+                    //loads next question
+                    loadQuiz();
+                }
+                else {
+                    //display score and ask for user initials
+                    question.textContent = "All done";
+                    //set start btn to reload page
+                    startBtn.setAttribute("click", "location.reload()");
+                }
             }
         }
     }
 
-    //submit and grab next question
-    loadQuiz();
+    //deselect radio on load
+    userAnswer = deselectAnswer;
+
 });
 
 function countdown() {
@@ -193,7 +198,7 @@ function countdown() {
             gameStarted = false;
             //set start btn to reload page
             startBtn.removeAttribute("id");
-            startBtn.hidden = false;
+            // startBtn.hidden = false;
             startBtn.textContent = "Reload"
             startBtn.setAttribute("onclick", "location.reload()");
         }
@@ -201,7 +206,7 @@ function countdown() {
         else if (indexQuiz === quizArray.length) {
             clearInterval(timerInterval);
             timer.textContent = score + "/" + quizArray.length;
-            startBtn.hidden = false;
+            // startBtn.hidden = false;
             startBtn.setAttribute("onclick", "location.reload()");
             //save to LS asking for initials
             askUser();
@@ -252,7 +257,7 @@ function deselectAnswer() {
 }
 
 function userWrong() {
-    timeRemaining -= 15;
+    timeRemaining -= 10;
     timer.textContent = timeRemaining;
     //maybe look into some feedback effect
     //like change border red and clock red for a sec
