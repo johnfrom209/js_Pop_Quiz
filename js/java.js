@@ -113,8 +113,12 @@ const aText = document.getElementById("aText");
 const bText = document.getElementById("dText");
 const cText = document.getElementById("bText");
 const dText = document.getElementById("cText");
-//grabbing all answer elements on the page
+//grabbing all class of options on the page
 const answerEls = document.querySelectorAll(".options");
+//the ul html
+var cleanUl = document.getElementById("listed");
+//grab the submit with id "submitScore"
+let formUSubmit;
 //score tracker
 var score = 0;
 //index for array
@@ -124,6 +128,7 @@ var gameStarted = false;
 //what did the user select
 var userAnswer = undefined;
 var timeRemaining = 0;
+
 //on click start quiz and start timer
 startBtn.addEventListener("click", () => {
 
@@ -157,39 +162,39 @@ startBtn.addEventListener("click", () => {
             }
             else {
                 //display score and ask for user initials
+                question.textContent = "All done";
             }
         }
     }
 
     //submit and grab next question
     loadQuiz();
-
-
-    console.log(userAnswer);
 });
 
 function countdown() {
-    timeRemaining = 60;
+    timeRemaining = 5;
     var timerInterval = setInterval(function () {
         //sub timer by 1 each interval
         timeRemaining -= 1;
         //set the new display in html
         timer.textContent = timeRemaining;
-        //check if time is equal to zero
+        //check if time is less than or equal to zero
         if (timeRemaining <= 0) {
             clearInterval(timerInterval);
-            timer.textContent = "Game is Over";
-            //TODO: 
+            timer.textContent = score + "/" + quizArray.length;
             //save to LS asking for initials
+            askUser();
             //reset gamestarted
+            gameStarted = false;
         }
         //win condition
         else if (indexQuiz === quizArray.length) {
             clearInterval(timerInterval);
-            timer.textContent = "Game is Over";
-            //TODO: 
+            timer.textContent = score + "/" + quizArray.length;
             //save to LS asking for initials
+            askUser();
             //reset gameStarted
+            gameStarted = false;
         }
 
     }, 1000);///1 sec interval
@@ -239,5 +244,84 @@ function userWrong() {
     timer.textContent = timeRemaining;
     //maybe look into some feedback effect
     //like change border red and clock red for a sec
+}
+
+function saveToLS() {
+    //debugger
+    //create array for object with prop of initials and score
+    var playedArray = [];
+    //grab score from the form
+    var user = document.getElementById("submitScore").value;
+
+    //check if initials is filled
+    if (user === "" || user === null) {
+        question.textContent = "Enter your initials"
+    }
+    else {
+        //create an object with properties to hold the user initials and score
+        var listedScore = {
+            initials: user,
+            savedScore: score
+        }
+        if (JSON.parse(localStorage.getItem("PlayedArray")) === null) {
+            playedArray.push(listedScore);
+        }
+        else {
+            //pulling the LS saves
+            playedArray = JSON.parse(localStorage.getItem("PlayedArray"));
+            //push the new listedScore var
+            playedArray.push(listedScore);
+        }
+        //saves to LocalStorage
+        localStorage.setItem("PlayedArray", JSON.stringify(playedArray));
+        loadFromLS();
+    }
+}
+
+function loadFromLS() {
+    //clear li
+    cleanUl.textContent = "";
+
+    question.textContent = "Here are the scores"
+    //load LS
+
+    //looping through the LS to display on page
+    var played = [JSON.parse(localStorage.getItem("PlayedArray"))];
+    console.log(played);
+    for (var i = 0; i < played[0].length; i++) {
+        // var temp = played[i];
+        var li = document.createElement("li");
+        li.textContent = played[0][i].initials + " " + played[0][i].savedScore;
+        cleanUl.appendChild(li);
+    }
+}
+
+function askUser() {
+    //clear the display
+    //cleanUl = document.getElementById("listed");
+    cleanUl.textContent = "";
+    question.textContent = "Save your score with your initials."
+
+    //input ask for initials
+    var userInitials = document.createElement("input");
+    userInitials.setAttribute("type", "text");
+    userInitials.setAttribute("class", "submit");
+    userInitials.setAttribute("id", "submitScore");
+    //create submit for form
+    var formSubmit = document.createElement("input");
+    formSubmit.setAttribute("type", "submit");
+    formSubmit.setAttribute("value", "Submit Score");
+    formSubmit.setAttribute("onclick", "saveToLS()")
+    // formSubmit.setAttribute("id", "submitScore");
+
+    cleanUl.appendChild(userInitials);
+    cleanUl.appendChild(formSubmit);
+
+    // formUSubmit = document.getElementById("submitScore");
 
 }
+
+//see scores
+//make link hidden
+//clear the li
+//display scores from ls

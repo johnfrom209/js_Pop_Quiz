@@ -71,3 +71,9 @@ body {
     margin: 5px;
     cursor: pointer;
 }
+
+.submit {
+    /* padding: 8px; */
+    height: 28px;
+    margin: 8px;
+}
