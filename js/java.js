@@ -117,6 +117,8 @@ const dText = document.getElementById("cText");
 const answerEls = document.querySelectorAll(".options");
 //the ul html
 var cleanUl = document.getElementById("listed");
+
+var feedback = document.getElementById("feedback");
 //grab the submit with id "submitScore"
 let formUSubmit;
 //score tracker
@@ -139,9 +141,7 @@ startBtn.addEventListener("click", () => {
         gameStarted = true;
         //submit and grab next question
         loadQuiz();
-        //hide start btn
-        // startBtn.setAttribute("hidden")
-
+        //changes the text inside of the button
         startBtn.textContent = "Submit";
     }
     else {
@@ -155,12 +155,12 @@ startBtn.addEventListener("click", () => {
             if (userAnswer) {
                 if (userAnswer === quizArray[indexQuiz].correct) {
                     score++;
-                    var feedback = document.getElementById("feedback");
+
                     feedback.removeAttribute("hidden")
                     feedback.textContent = "Correct!"
                 }
                 else {
-                    var feedback = document.getElementById("feedback");
+
                     feedback.removeAttribute("hidden")
                     feedback.textContent = "Wrong!"
                     //call the wrong function to lower time
@@ -206,7 +206,9 @@ function countdown() {
             gameStarted = false;
             //set start btn to reload page
             startBtn.removeAttribute("id");
-            // startBtn.hidden = false;
+            //clears the feedback
+            feedback.textContent = "";
+            //sets the text for the button
             startBtn.textContent = "Reload"
             startBtn.setAttribute("onclick", "location.reload()");
         }
@@ -214,7 +216,8 @@ function countdown() {
         else if (indexQuiz === quizArray.length) {
             clearInterval(timerInterval);
             timer.textContent = score + "/" + quizArray.length;
-            // startBtn.hidden = false;
+            //clears the feedback 
+            feedback.textContent = "";
             startBtn.setAttribute("onclick", "location.reload()");
             startBtn.textContent = "Reload"
             //save to LS asking for initials
