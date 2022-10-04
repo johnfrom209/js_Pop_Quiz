@@ -118,6 +118,8 @@ const answerEls = document.querySelectorAll(".options");
 //the ul html
 var cleanUl = document.getElementById("listed");
 
+// var clearScores = "";
+
 var feedback = document.getElementById("feedback");
 //grab the submit with id "submitScore"
 let formUSubmit;
@@ -317,7 +319,7 @@ function loadFromLS() {
 
     //looping through the LS to display on page
     var played = JSON.parse(localStorage.getItem("PlayedArray"));
-    console.log(played);
+
     for (var i = 0; i < played.length; i++) {
         // var temp = played[i];
         var li = document.createElement("li");
@@ -327,6 +329,12 @@ function loadFromLS() {
 
     //replace the start to reload the page
     startBtn.setAttribute("click", "location.reload()");
+
+    var clearScores = document.createElement("a");
+    clearScores.setAttribute("class", "clearHS");
+    clearScores.textContent = "Clear Scores";
+    clearScores.setAttribute("onclick", "clearScores()");
+    timer.append(clearScores);
 }
 
 function askUser() {
@@ -350,6 +358,25 @@ function askUser() {
     cleanUl.appendChild(userInitials);
     cleanUl.appendChild(formSubmit);
 
-    // formUSubmit = document.getElementById("submitScore");
-
 }
+
+// //on click clear LS
+function clearScores() {
+
+    localStorage.clear();
+
+    cleanUl.textContent = "";
+}
+
+// clearScores.on("click", () => {
+
+//     localStorage.clear();
+
+//     cleanUl.textContent = "";
+
+// });
+
+// clearScores = document.createElement("button");
+    // clearScores.setAttribute("class", "clearHS");
+    // clearScores.textContent = "Clear Scores";
+    // timer.append(clearScores);
