@@ -155,8 +155,14 @@ startBtn.addEventListener("click", () => {
             if (userAnswer) {
                 if (userAnswer === quizArray[indexQuiz].correct) {
                     score++;
+                    var feedback = document.getElementById("feedback");
+                    feedback.removeAttribute("hidden")
+                    feedback.textContent = "Correct!"
                 }
                 else {
+                    var feedback = document.getElementById("feedback");
+                    feedback.removeAttribute("hidden")
+                    feedback.textContent = "Wrong!"
                     //call the wrong function to lower time
                     userWrong();
                 }
@@ -260,6 +266,7 @@ function deselectAnswer() {
 }
 
 function userWrong() {
+
     timeRemaining -= 10;
     timer.textContent = timeRemaining;
     //maybe look into some feedback effect

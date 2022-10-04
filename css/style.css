@@ -23,7 +23,7 @@ body {
     margin: auto;
     justify-content: center;
     text-align: center;
-    margin-top: 4%;
+    margin-top: 2%;
     border: #000000 solid 8px;
     border-radius: 10px;
 }
@@ -76,4 +76,9 @@ body {
     /* padding: 8px; */
     height: 28px;
     margin: 8px;
+}
+
+.feedback {
+    margin-top: 10px;
+    text-align: center;
 }
