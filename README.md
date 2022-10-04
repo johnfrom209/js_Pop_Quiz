@@ -10,6 +10,39 @@ Here is a screenshot of a quiz in progress:
 Here is a screenshot of the score board:
 ![Screenshot](./images/jsQuizScores.png)
 
+Here is a snippet of code from the project that displays scores from the local storage. With this I was able to pull all local data and display it to the screen. I grabed the properties from the objects in the array and created a li and displayed it to the screen by appending it to the the ul on the page.
+
+```javascript
+//looping through the LS to display on page
+    var played = JSON.parse(localStorage.getItem("PlayedArray"));
+
+    for (var i = 0; i < played.length; i++) {
+        // var temp = played[i];
+        var li = document.createElement("li");
+        li.textContent = played[i].initials + " " + played[i].savedScore;
+        cleanUl.appendChild(li);
+    }
+
+```
+Here is the function I used to dispaly the questions and four options. The first thing I did was make sure the radio buttons were deselected for the next set of questions. After that I use global variables to keep track of which question to display and the options that go with the question.
+
+```javascript
+//deselect radio
+    deselectAnswer();
+
+    //grabs the object at index
+    const displayedQuiz = quizArray[indexQuiz];
+    //displays the question
+    question.innerText = displayedQuiz.question;
+
+    //possible to display randomly with caurosel  
+    //sets the options 
+    aText.innerText = displayedQuiz.a;
+    cText.innerText = displayedQuiz.b;
+    dText.innerText = displayedQuiz.c;
+    bText.innerText = displayedQuiz.d;
+```
+
 
 ## Installation
 

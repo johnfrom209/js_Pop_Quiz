@@ -367,16 +367,3 @@ function clearScores() {
 
     cleanUl.textContent = "";
 }
-
-// clearScores.on("click", () => {
-
-//     localStorage.clear();
-
-//     cleanUl.textContent = "";
-
-// });
-
-// clearScores = document.createElement("button");
-    // clearScores.setAttribute("class", "clearHS");
-    // clearScores.textContent = "Clear Scores";
-    // timer.append(clearScores);
